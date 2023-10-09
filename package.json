@@ -9,8 +9,8 @@
     "build": "npx tsc -p .",
     "dev": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/index.ts",
     "db:clean": "npx prisma db push --force-reset",
-    "db:seed": "npx ts-node prisma/seed.ts",
-    "db:regen": "npm run db:clean && npm run db:seed"
+    "db:seed": "node --loader ts-node/esm prisma/seed.ts",
+    "db:init": "npm run db:clean && npm run db:seed"
   },
   "author": "jimin",
   "license": "ISC",
