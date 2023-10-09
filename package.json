@@ -8,10 +8,14 @@
     "start": "npm run build && node dist/index.js",
     "build": "npx tsc -p .",
     "dev": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/index.ts",
+    "db:clean": "npx prisma db push --force-reset",
+    "db:seed": "npx ts-node prisma/seed.ts",
+    "db:regen": "npm run db:clean && npm run db:seed"
   },
   "author": "jimin",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^5.4.1",
     "dotenv": "^16.3.1",
     "express": "^4.18.2"
   },
