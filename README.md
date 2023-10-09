@@ -1,7 +1,12 @@
 # wanted-pre-onboarding-backend
-원티드의 프리온보딩 선발과제를 제출하기 위한 레포지토리입니다.
+원티드의 프리온보딩 백엔드 인턴십 선발과제를 제출하기 위한 레포지토리입니다.
 
-# 과제 분석
+## 목차
+- [구현 내역](#구현-내역)
+- [DB 모델 상세](#db-모델-상세)
+
+---
+
 [과제 링크](https://bow-hair-db3.notion.site/1850bca26fda4e0ca1410df270c03409)
 
 회사가 작성하는 채용공고에 대해서 간단한 [`CRUD`](https://ko.wikipedia.org/wiki/CRUD) 를 구현하는 과제이다.
@@ -13,40 +18,42 @@
 - 채용공고 상세내용 검색기능 추가
 - 회사가 낸 공고 리스트를 조회하는 기능 추가
 
+---
+
 ## DB 모델 상세
-### 회사
+### Company
 ```object
 {
-    회사_id,
-    회사명,
-    국가,
-    지역,
+    id,
+    name,
+    contry,
+    region,
 }
 ```
-### 채용공고
+### Recruitment
 ```object
 {
-    채용공고_id,
-    회사_id 로 회사정보 추가,
-    채용포지션,
-    채용보상금,
-    사용기술,
-    채용내용(리스트로 조회할 때는 생략),
+    id,
+    companyId,
+    position,
+    compensation,
+    techStack,
+    applications,
 }
 ```
-### 사용자
+### User
 ```object
 {
-    사용자_id,
-    닉네임,
-    이메일,
+    id,
+    name,
+    email,
 }
 ```
-### 지원
+### Application
 ```object
 {
-    채용공고_id,
-    사용자_id,
+    recruitmentId,
+    userId,
 }
 ```
 
