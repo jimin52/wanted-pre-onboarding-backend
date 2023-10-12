@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "description": "원티드의 프리온보딩 선발과제를 제출하기 위한 레포지토리입니다.",
   "repository": "https://github.com:jimin52/wanted-pre-onboarding-backend.git",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "scripts": {
-    "start": "npm run build && node dist/index.js",
+    "start": "npm run build && node dist/src/index.js",
     "build": "npx tsc -p .",
-    "prod": "npm run build && npm run start",
-    "dev": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/index.ts",
+    "dev": "npm run db:init && nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/index.ts",
+    "prod:init": "npm run db:init && npm run start",
+    "db:migrate": "npx prisma migrate dev --name init",
     "db:clean": "npx prisma db push --force-reset",
-    "db:seed": "node --loader ts-node/esm prisma/seed.ts",
+    "db:seed": "ts-node prisma/seed.ts",
     "db:init": "npm run db:clean && npm run db:seed"
   },
   "author": "jimin",
@@ -29,35 +30,5 @@
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   }
-}
-{
-  "name": "wanted-pre-onboarding-backend",
-  "version": "1.0.0",
-  "description": "원티드의 프리온보딩 선발과제를 제출하기 위한 레포지토리입니다.",
-  "repository": "https://github.com:jimin52/wanted-pre-onboarding-backend.git",
-  "main": "dist/server.js",
-  "scripts": {
-    "start": "npm run build && node dist/server.js",
-    "build": "npx tsc -p .",
-    "dev": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/index.ts",
-    "prod": "npm run build && npm run start",
-    "db:clean": "npx prisma db push --force-reset",
-    "db:seed": "node --loader ts-node/esm prisma/seed.ts",
-    "db:init": "npm run db:clean && npm run db:seed"
-  },
-  "author": "jimin",
-  "license": "ISC",
-  "dependencies": {
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2"
-  },
-  "devDependencies": {
-    "@types/dotenv": "^8.2.0",
-    "@types/express": "^4.17.18",
-    "@types/node": "^20.8.3",
-    "nodemon": "^3.0.1",
-    "prisma": "^5.4.1",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.2.2"
-  }
+  
 }
