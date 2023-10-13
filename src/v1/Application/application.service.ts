@@ -1,4 +1,3 @@
-
-export const getApplications = async(validSearch: string) => {
-    return { message: validSearch + ' getApplications'}
-}
+export const getApplications = async (validSearch: string) => {
+	return { message: validSearch + ' getApplications' };
+};

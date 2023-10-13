@@ -5,7 +5,11 @@ import { GetApplicationQuery } from './application.schema';
 
 const ApplicationRouter = Router();
 
-ApplicationRouter.get('/', validateQueryWithZod(GetApplicationQuery), ApplicationController.getApplications);
+ApplicationRouter.get(
+	'/',
+	validateQueryWithZod(GetApplicationQuery),
+	ApplicationController.getApplications,
+);
 ApplicationRouter.post('/', ApplicationController.postApplication);
 ApplicationRouter.get('/:id', ApplicationController.getApplication);
 ApplicationRouter.put('/:id', ApplicationController.putApplication);
