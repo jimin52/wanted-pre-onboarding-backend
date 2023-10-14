@@ -17,3 +17,5 @@ export const getApplication = async (req: Request, res: Response) => {};
 export const putApplication = async (req: Request, res: Response) => {};
 
 export const deleteApplication = async (req: Request, res: Response) => {};
+
+export const getApplicationDetail = async (req: Request, res: Response) => {};
