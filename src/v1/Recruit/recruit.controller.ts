@@ -6,8 +6,12 @@ export const getRecruits = async (
 	res: Response,
 	next: NextFunction,
 ) => {
-	const mockRecruits = await allRecruits();
-	res.status(200).json(mockRecruits);
+	try {
+		const mockRecruits = await allRecruits();
+		res.status(200).json(mockRecruits);
+	} catch (err) {
+		next(err);
+	}
 };
 
 export const postRecruit = async (

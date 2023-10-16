@@ -4,17 +4,17 @@ import httpMocks from 'node-mocks-http';
 import { Response } from 'express';
 import { Recruitment } from './recruit.schema';
 
-const initMockObjects = (validQuery: object) => {
-	const mockRequest = initMockRequest(validQuery);
+const initMockObjects = (validParam: object | undefined) => {
+	const mockRequest = initMockRequest(validParam);
 	const mockResponse = httpMocks.createResponse();
 	const mockNext = jest.fn();
 	return { mockRequest, mockResponse, mockNext };
 };
-const initMockRequest = (validQuery: object | undefined) => {
+const initMockRequest = (validParam: object | undefined) => {
 	return httpMocks.createRequest({
 		method: 'GET',
-		url: '/v1/application',
-		validQuery,
+		url: '/v1/recruit',
+		validParam,
 	});
 };
 const expectMockResponse = (
@@ -28,16 +28,15 @@ const expectMockResponse = (
 
 describe('RecruitController', () => {
 	describe('getRecruits', () => {
-		it('should return 200 with all recruits', async () => {
-			const validQuery = {};
+		it('모든 recruit 조회', async () => {
 			const { mockRequest, mockResponse, mockNext } =
-				initMockObjects(validQuery);
+				initMockObjects(undefined);
 			const mockRecruits: Recruitment[] = [
 				{
 					id: 1,
 					companyId: 1,
 					position: 'test',
-					compensation: 'test',
+					compensation: 1000000,
 					techStack: ['test'],
 					description: 'test',
 				},
@@ -48,5 +47,34 @@ describe('RecruitController', () => {
 			await RecruitController.getRecruits(mockRequest, mockResponse, mockNext);
 			expectMockResponse(mockResponse, 200, mockRecruits);
 		});
+		it('recruit 조회 실패', async () => {
+			const { mockRequest, mockResponse, mockNext } =
+				initMockObjects(undefined);
+			jest
+				.spyOn(RecruitServices, 'allRecruits')
+				.mockReturnValue(Promise.reject(new Error('error')));
+			await RecruitController.getRecruits(mockRequest, mockResponse, mockNext);
+			expect(mockNext).toHaveBeenCalledWith(
+				expect.objectContaining({ message: 'error' }),
+			);
+		});
 	});
+	describe('postRecruit', () => {
+		it('recruit 생성', async () => {
+			const { mockRequest, mockResponse, mockNext } =
+				initMockObjects(undefined);
+			const mockRecruit: Recruitment = {
+				id: 1,
+				companyId: 1,
+				position: 'test',
+				compensation: 100000,
+				techStack: ['test'],
+				description: 'test',
+			};
+			jest
+				.spyOn(RecruitServices, 'createRecruit')
+				.mockReturnValue(Promise.resolve(mockRecruit));
+			await RecruitController.postRecruit(mockRequest, mockResponse, mockNext);
+			expectMockResponse(mockResponse, 200, mockRecruit);
+		}
 });
