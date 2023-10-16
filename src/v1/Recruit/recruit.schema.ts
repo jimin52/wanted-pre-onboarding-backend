@@ -11,3 +11,12 @@ export const RecruitBodySchema = z.object({
 	techStack: z.array(z.string()).min(1),
 	description: z.string().min(20),
 });
+
+export type Recruitment = {
+	id: number;
+	companyId: number;
+	position: string;
+	compensation: string;
+	techStack: string[];
+	description: string;
+};
