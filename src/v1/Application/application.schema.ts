@@ -4,7 +4,7 @@ import { NumberSchema } from '../utils/global.schema';
 
 extendZodWithOpenApi(z);
 export const ApplicationGetQuerySchema = z.object({
-	search: NumberSchema,
+	search: z.string(),
 });
 
 export const ApplicationGetResponseSchema = z
