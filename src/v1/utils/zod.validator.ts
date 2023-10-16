@@ -37,7 +37,7 @@ export const validateQueryWithZod = <T extends z.ZodType>(schema: T) => {
 	};
 };
 
-export const validateParamsWithZod = <T extends z.ZodType>(schema: T) => {
+export const validateParamWithZod = <T extends z.ZodType>(schema: T) => {
 	return async (req: Request, res: Response, next: NextFunction) => {
 		const result = schema.safeParse(req.params);
 		if (result.success) {

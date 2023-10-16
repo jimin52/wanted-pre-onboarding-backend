@@ -41,7 +41,6 @@ describe('application controller 테스트', () => {
 				mockResponse,
 				mockNext,
 			);
-
 			expectMockResponse(mockResponse, 200, 'test');
 		});
 		//'search 가 없을 경우는 없음'

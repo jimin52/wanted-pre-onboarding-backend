@@ -2,7 +2,7 @@ import { Router } from 'express';
 import * as ApplicationController from './application.controller';
 import {
 	validateBodyWithZod,
-	validateParamsWithZod,
+	validateParamWithZod,
 	validateQueryWithZod,
 } from '../utils/zod.validator';
 import {
@@ -32,18 +32,18 @@ ApplicationRouter.get(
 );
 ApplicationRouter.get(
 	'/:id',
-	validateParamsWithZod(ParamIdSchema),
+	validateParamWithZod(ParamIdSchema),
 	ApplicationController.getApplication,
 );
 ApplicationRouter.put(
 	'/:id',
-	validateParamsWithZod(ParamIdSchema),
+	validateParamWithZod(ParamIdSchema),
 	validateBodyWithZod(ApplicationPutRequestSchema),
 	ApplicationController.putApplication,
 );
 ApplicationRouter.delete(
 	'/:id',
-	validateParamsWithZod(ParamIdSchema),
+	validateParamWithZod(ParamIdSchema),
 	ApplicationController.deleteApplication,
 );
 export default ApplicationRouter;

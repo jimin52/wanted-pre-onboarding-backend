@@ -3,10 +3,12 @@ import {
 	OpenApiGeneratorV3,
 } from '@asteasolutions/zod-to-openapi';
 import { makeApplicationOpenApi } from '../application/application.openapi';
+import { makeRecruitOpenApi } from '../recruit/recruit.openapi';
 
 export const registry = new OpenAPIRegistry();
 
 makeApplicationOpenApi();
+makeRecruitOpenApi();
 
 export function getOpenApiDocumentation() {
 	const generator = new OpenApiGeneratorV3(registry.definitions);
