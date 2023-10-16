@@ -1,5 +1,5 @@
 import { Recruitment } from './recruit.schema';
-export const getRecruits = async () => {
+export const allRecruits = async () => {
 	const mockRecruits: Recruitment[] = [
 		{
 			id: 1,

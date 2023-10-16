@@ -43,7 +43,7 @@ describe('RecruitController', () => {
 				},
 			];
 			jest
-				.spyOn(RecruitServices, 'getRecruits')
+				.spyOn(RecruitServices, 'allRecruits')
 				.mockReturnValue(Promise.resolve(mockRecruits));
 			await RecruitController.getRecruits(mockRequest, mockResponse, mockNext);
 			expectMockResponse(mockResponse, 200, mockRecruits);
