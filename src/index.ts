@@ -3,15 +3,19 @@ import v1router from './v1/route';
 import { errorHandler } from './v1/utils/error.handler';
 import { getOpenApiDocumentation } from './v1/utils/openapi';
 import swaggerUi from 'swagger-ui-express';
+import { PrismaClient } from '@prisma/client';
 
 const app: express.Application = express();
 const PORT = process.env.PORT || 3000;
-app.get('/welcome', (req: Request, res: Response) => {
+export const prisma = new PrismaClient();
+
+app.get('/', (req: Request, res: Response) => {
 	res.send('welcome!');
 });
 
-app.use('/v1', v1router);
 app.use(errorHandler);
+
+app.use('/v1', v1router);
 
 const swaggerDocument = getOpenApiDocumentation();
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -21,7 +25,7 @@ app.listen(PORT, () => {
 	console.log(`
   ################################################
   🛡️  Server listening on port: ${PORT}🛡️
-  Running on: http://localhost:${PORT}/welcome
+    Running on: http://localhost:${PORT}
   ################################################
   `);
 });
