@@ -62,7 +62,7 @@ export const makeRecruitOpenApi = () => {
 	registry.registerPath({
 		tags: ['Recruit'],
 		method: 'get',
-		path: '/recruit/:id',
+		path: '/recruit/{id}',
 		request: {
 			params: ParamIdSchema,
 		},
@@ -83,7 +83,7 @@ export const makeRecruitOpenApi = () => {
 	registry.registerPath({
 		tags: ['Recruit'],
 		method: 'put',
-		path: '/recruit/:id',
+		path: '/recruit/{id}',
 		request: {
 			params: ParamIdSchema,
 			body: {
@@ -113,18 +113,13 @@ export const makeRecruitOpenApi = () => {
 	registry.registerPath({
 		tags: ['Recruit'],
 		method: 'delete',
-		path: '/recruit/:id',
+		path: '/recruit/{id}',
 		request: {
 			params: ParamIdSchema,
 		},
 		responses: {
 			200: {
 				description: '채용공고 삭제 성공',
-				content: {
-					'application/json': {
-						schema: RecruitBodySchema.openapi('Recruit'),
-					},
-				},
 			},
 			400: BadRequestConfig,
 			404: NotFoundConfig,

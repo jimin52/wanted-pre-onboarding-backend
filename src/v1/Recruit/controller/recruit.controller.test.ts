@@ -37,12 +37,12 @@ describe('RecruitController', () => {
 					position: 'test',
 					title: 'test',
 					compensation: 1000000,
-					techStacks: [{ name: 'test' }],
+					techStacks: ['test'],
 					description: '123456789abcdefghijk',
 				},
 			];
 			jest
-				.spyOn(RecruitServices, 'allRecruits')
+				.spyOn(RecruitServices, 'findAllRecruits')
 				.mockReturnValue(Promise.resolve(mockRecruits));
 			await RecruitController.getRecruits(mockRequest, mockResponse, mockNext);
 			expectMockResponse(mockResponse, 200, mockRecruits);
@@ -51,7 +51,7 @@ describe('RecruitController', () => {
 			const { mockRequest, mockResponse, mockNext } =
 				initMockObjects(undefined);
 			jest
-				.spyOn(RecruitServices, 'allRecruits')
+				.spyOn(RecruitServices, 'findAllRecruits')
 				.mockReturnValue(Promise.reject(new Error('error')));
 			await RecruitController.getRecruits(mockRequest, mockResponse, mockNext);
 			expect(mockNext).toHaveBeenCalledWith(
@@ -68,7 +68,7 @@ describe('RecruitController', () => {
 				position: 'test',
 				title: 'test',
 				compensation: 100000,
-				techStacks: [{ name: 'test' }],
+				techStacks: ['test'],
 				description: 'test',
 			};
 			jest

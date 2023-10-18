@@ -5,9 +5,9 @@
   "repository": "https://github.com:jimin52/wanted-pre-onboarding-backend.git",
   "main": "dist/src/index.js",
   "scripts": {
-    "start": "npm run build && node dist/src/index.js",
+    "start": "npm run build && node dist/src/server.js",
     "build": "npx tsc -p .",
-    "dev": "npm run db:init && nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/index.ts",
+    "dev": "npm run db:init && nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/server.ts",
     "test": "jest --setupFiles dotenv/config --forceExit --detectOpenHandles",
     "prod:init": "npm run db:init && npm run start",
     "db:migrate": "npx prisma migrate dev --name init",

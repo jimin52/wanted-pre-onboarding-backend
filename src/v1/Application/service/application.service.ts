@@ -12,7 +12,7 @@ export const getApplications = async (validSearch: string) => {
 						company: {
 							OR: [
 								{ name: { contains: validSearch, mode: 'insensitive' } },
-								{ country: { contains: validSearch, mode: 'insensitive' } }, // 오타인지 확인하세요 (contry 대신 country를 원하셨을 수도 있습니다)
+								{ country: { contains: validSearch, mode: 'insensitive' } },
 								{ region: { contains: validSearch, mode: 'insensitive' } },
 							],
 						},

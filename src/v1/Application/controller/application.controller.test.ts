@@ -1,6 +1,6 @@
 import * as ApplicationService from '../service/application.service';
 import * as ApplicationController from './application.controller';
-import httpMocks, { MockRequest, MockResponse } from 'node-mocks-http';
+import httpMocks from 'node-mocks-http';
 import { Response } from 'express';
 
 const initMockObjects = (validQuery: object) => {
@@ -40,7 +40,7 @@ describe('application controller 테스트', () => {
 				mockResponse,
 				mockNext,
 			);
-			expectMockResponse(mockResponse, 200, 'test');
+			expectMockResponse(mockResponse, 200, { message: 'test' });
 		});
 		//'search 가 없을 경우는 없음'
 		it('search 가 nullish 인 application 모두 조회하기', async () => {
@@ -55,7 +55,7 @@ describe('application controller 테스트', () => {
 				mockResponse,
 				mockNext,
 			);
-			expectMockResponse(mockResponse, 200, 'test');
+			expectMockResponse(mockResponse, 200, { message: 'test' });
 		});
 		// service 에서 에러가 발생할 경우
 		it('service 에서 에러가 발생할 경우', async () => {

@@ -2,9 +2,10 @@ import { z } from 'zod';
 import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
 
 extendZodWithOpenApi(z);
+
 export const NumberSchema = z
 	.string()
-	.refine((value) => !isNaN(Number(value)), {
+	.refine((value) => (console.log(value), !isNaN(Number(value))), {
 		message: 'Not a Number',
 	})
 	.transform((v) => parseInt(v, 10));
