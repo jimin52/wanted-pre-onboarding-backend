@@ -49,7 +49,5 @@ export const getApplications = async (validSearch: string) => {
 			},
 		},
 	});
-
-	console.log(matchedApplications);
 	return matchedApplications;
 };

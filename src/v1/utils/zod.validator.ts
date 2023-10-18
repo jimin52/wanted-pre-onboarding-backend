@@ -15,7 +15,6 @@ export interface ValidParamRequest<T extends z.ZodType> extends Request {
 
 export const validateBodyWithZod = <T extends z.ZodType>(schema: T) => {
 	return async (req: Request, res: Response, next: NextFunction) => {
-		console.log(req.body);
 		const result = schema.safeParse(req.body);
 		if (result.success) {
 			(req as ValidBodyRequest<T>).validBody = result.data;

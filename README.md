@@ -18,14 +18,20 @@
 DATABASE_URL 알아두기
 ### env 파일
 root 에 .env 파일 추가
-```text
-DATABASE_URL=""     # postgresql서버의 URL 추가
-PORT=3000           # default 3000으로 실행됨
+```txt
+DATABASE_URL="postgres://postgres:postgrespw@localhost:55000"     # postgresql서버의 URL 추가. 예시
+PORT="3000"           # default 3000으로 실행됨
 ```
 ### 배포 환경에서 실행
 ```bash
+npm i
 npm run db:init     # db migrate 및 seed
 npm run start       # build 및 실행
+```
+### 개발 환경
+```bash
+npm i
+npm run dev         # db 초기화 및 초기값 후 dev 모드로 실행됨
 ```
 ### 테스트
 ``` bash
@@ -102,7 +108,7 @@ http://localhost:3000/api-docs
     companyId,
     position,
     compensation,
-    techStack,
+    techStacks,
     applications,
 }
 ```
@@ -129,7 +135,7 @@ http://localhost:3000/api-docs
 - typescript: 최소한의 타입 안전을 보장하기 위해 typescript 로 작성
 - prisma: 타입 안전한 ORM 선택
 - dotenv: env 값을 가져와야 해서 사용
-- zod: 타입 이외의 런타임 validate 를 위해 사용
+- zod: 타입 이외의 런타임 validate 를 위해 사용n
 
 ### 기본 세팅
 - 기본 라이브러리 세팅 (express, typescript)

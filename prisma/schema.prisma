@@ -40,12 +40,11 @@ model TechStack {
 }
 
 model RecruitmentTechStack {
+  id            Int      @id @default(autoincrement())
   recruitmentId Int
   techStackId   Int
   recruitment   Recruitment @relation(fields: [recruitmentId], references: [id])
   techStack     TechStack   @relation(fields: [techStackId], references: [id])
-
-  @@id ([recruitmentId, techStackId])
 }
 model User {
   id          Int      @id @default(autoincrement())
@@ -57,12 +56,11 @@ model User {
 }
 
 model Application {
+  id          Int      @id @default(autoincrement())
   userId        Int
   recruitmentId Int
   user        User     @relation(fields: [userId], references: [id])
   recruitment Recruitment @relation(fields: [recruitmentId], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-
-  @@id ([userId, recruitmentId])
 }

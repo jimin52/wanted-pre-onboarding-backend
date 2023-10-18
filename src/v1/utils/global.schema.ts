@@ -5,7 +5,7 @@ extendZodWithOpenApi(z);
 
 export const NumberSchema = z
 	.string()
-	.refine((value) => (console.log(value), !isNaN(Number(value))), {
+	.refine((value) => !isNaN(Number(value)), {
 		message: 'Not a Number',
 	})
 	.transform((v) => parseInt(v, 10));

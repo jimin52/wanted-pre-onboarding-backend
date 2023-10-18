@@ -106,95 +106,81 @@ export const findRecruitById = async (id: number) => {
 	return recruitReturn;
 };
 
-export const upsertRecruit = async (id: number, recruit: RecruitBodyType) => {
-	const prismaReturn = await prisma.recruitment.upsert({
-		where: {
-			id,
-		},
-		update: {
-			company: {
-				connect: {
-					id: recruit.companyId,
-				},
-			},
-			position: recruit.position,
-			compensation: recruit.compensation,
-			title: recruit.title,
-			techStacks: {
-				create: recruit.techStacks.map((techStack) => ({
-					techStack: {
-						connectOrCreate: {
-							where: {
-								name: techStack,
-							},
-							create: {
-								name: techStack,
-							},
-						},
-					},
-				})),
-			},
-			description: recruit.description,
-		},
-		create: {
-			company: {
-				connect: {
-					id: recruit.companyId,
-				},
-			},
-			position: recruit.position,
-			compensation: recruit.compensation,
-			title: recruit.title,
-			techStacks: {
-				create: recruit.techStacks.map((techStack) => ({
-					techStack: {
-						connectOrCreate: {
-							where: {
-								name: techStack,
-							},
-							create: {
-								name: techStack,
-							},
-						},
-					},
-				})),
-			},
-			description: recruit.description,
-		},
-		include: {
-			company: true,
-			techStacks: {
-				include: {
-					techStack: true,
-				},
-			},
-		},
+export const upsertRecruit = async (
+	id: number,
+	recruitData: RecruitBodyType,
+) => {
+	const existingRecruitment = await prisma.recruitment.findUnique({
+		where: { id },
 	});
-	const recruitReturn: RecruitWithTechstackType = {
-		companyId: prismaReturn.company.id,
-		position: prismaReturn.position,
-		compensation: prismaReturn.compensation,
-		title: prismaReturn.title,
-		techStacks: prismaReturn.techStacks.map(
-			(techStacks) => techStacks.techStack.name,
-		),
-		description: prismaReturn.description,
-	};
-	return recruitReturn;
+	let result;
+	if (existingRecruitment) {
+		// 존재하는 경우 업데이트
+		result = await prisma.$transaction([
+			prisma.recruitmentTechStack.deleteMany({ where: { recruitmentId: id } }),
+			prisma.recruitment.update({
+				where: { id },
+				data: {
+					companyId: recruitData.companyId,
+					position: recruitData.position,
+					compensation: recruitData.compensation,
+					title: recruitData.title,
+					description: recruitData.description,
+					techStacks: {
+						create: recruitData.techStacks.map((tech) => ({
+							techStack: {
+								connectOrCreate: {
+									where: { name: tech },
+									create: { name: tech },
+								},
+							},
+						})),
+					},
+				},
+			}),
+		]);
+	} else {
+		// 존재하지 않는 경우 새로 생성
+		result = await prisma.recruitment.create({
+			data: {
+				id,
+				companyId: recruitData.companyId,
+				position: recruitData.position,
+				compensation: recruitData.compensation,
+				title: recruitData.title,
+				description: recruitData.description,
+				techStacks: {
+					create: recruitData.techStacks.map((tech) => ({
+						techStack: {
+							connectOrCreate: {
+								where: { name: tech },
+								create: { name: tech },
+							},
+						},
+					})),
+				},
+			},
+		});
+	}
+	return result;
 };
 
 export const deleteRecruitById = async (id: number) => {
-	const prismaReturn = await prisma.recruitment.delete({
-		where: {
-			id,
-		},
-		include: {
-			company: true,
-			techStacks: {
-				include: {
-					techStack: true,
-				},
+	return await prisma.$transaction([
+		prisma.application.deleteMany({
+			where: {
+				recruitmentId: id,
 			},
-		},
-	});
+		}),
+		prisma.recruitmentTechStack.deleteMany({
+			where: {
+				recruitmentId: id,
+			},
+		}),
+		prisma.recruitment.delete({
+			where: {
+				id,
+			},
+		}),
+	]);
 };
