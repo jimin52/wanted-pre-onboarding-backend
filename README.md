@@ -24,15 +24,20 @@ PORT=3000           # default 3000으로 실행됨
 ```
 ### 배포 환경에서 실행
 ```bash
-npn run db:init     # db migrate 및 seed
+npm run db:init     # db migrate 및 seed
 npm run start       # build 및 실행
 ```
+### 테스트
+``` bash
+npm run test             # 모든 테스트 실행
+npm run test recruit     # recruit 테스트만 실행
+npm run test application # application 테스트 실행
+```
 
-### swagger
+### openapi 문서 경로
 ```
-http://localhost/api-docs
+http://localhost:3000/api-docs
 ```
-접속하면 openapi 문서 확인 가능
 
 ---
 
@@ -51,10 +56,17 @@ http://localhost/api-docs
 - 컨벤션을 통합 관리하기 위해 VSCode 환경에서 작업한다
 
 ### 파일 컨벤션
-- Layerd 전략
-  - router
-  - controller
-  - service
+#### Layered Architecture
+- router: 입력 검사, 경로 지정 및 openapi 문서 선언
+  - `*.router.ts`
+  - `*.openapi.ts `
+- controller: 비즈니스 로직, 테스트 코드
+  - `*.controller.ts`
+  - `*.controller.test.ts`
+- service: 각종 도구들. 대개 DB 와 소통
+  - `*.service.ts`
+  - `*.service.test.ts`
+
 
 ---
 
@@ -67,11 +79,11 @@ http://localhost/api-docs
 - 회사가 낸 공고 리스트를 조회하는 기능 추가
 
 ### 기술 요구사항 분석
-- ORM 사용
-- RDMBS 사용
-- Unit Test
-- 코드 컨벤션
-- Git Commit Message 컨벤션
+- [x] ORM 사용 할 것
+- [x] RDMBS 사용 할 것
+- [x] Unit Test 작성 할 것
+- [x] 코드 컨벤션 지정할 것
+- [x] Git Commit Message 컨벤션 지정할 것
 
 ### DB 모델 분석
 #### Company
