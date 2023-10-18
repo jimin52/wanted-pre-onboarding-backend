@@ -14,15 +14,25 @@
 회사가 작성하는 채용공고에 대해서 간단한 [`CRUD`](https://ko.wikipedia.org/wiki/CRUD) 를 구현하는 과제이다.
 
 ## 실행 방법
+### postgresql 작동시키기
+DATABASE_URL 알아두기
 ### env 파일
 root 에 .env 파일 추가
 ```text
-DATABASE_URL=""  # postgresql서버의 URL 추가
+DATABASE_URL=""     # postgresql서버의 URL 추가
+PORT=3000           # default 3000으로 실행됨
 ```
 ### 배포 환경에서 실행
 ```bash
-npm run prod
+npn run db:init     # db migrate 및 seed
+npm run start       # build 및 실행
 ```
+
+### swagger
+```
+http://localhost/api-docs
+```
+접속하면 openapi 문서 확인 가능
 
 ---
 
@@ -39,6 +49,12 @@ npm run prod
 ### 코드 컨벤션
 - ESLint, Prettier 설정을 따른다
 - 컨벤션을 통합 관리하기 위해 VSCode 환경에서 작업한다
+
+### 파일 컨벤션
+- Layerd 전략
+  - router
+  - controller
+  - service
 
 ---
 
