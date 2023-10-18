@@ -1,4 +1,4 @@
-import { prisma } from '../../index';
+import { prisma } from '../../../index';
 export const getApplications = async (validSearch: string) => {
 	if (!validSearch) {
 		// get all applications

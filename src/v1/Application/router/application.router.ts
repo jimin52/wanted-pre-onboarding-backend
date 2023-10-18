@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import * as ApplicationController from './application.controller';
+import * as ApplicationController from './controller/application.controller';
 import {
 	validateBodyWithZod,
 	validateParamWithZod,

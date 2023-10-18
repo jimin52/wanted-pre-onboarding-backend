@@ -2,7 +2,7 @@ import {
 	OpenAPIRegistry,
 	OpenApiGeneratorV3,
 } from '@asteasolutions/zod-to-openapi';
-import { makeApplicationOpenApi } from '../application/application.openapi';
+import { makeApplicationOpenApi } from '../application/router/application.openapi';
 import { makeRecruitOpenApi } from '../recruit/recruit.openapi';
 
 export const registry = new OpenAPIRegistry();

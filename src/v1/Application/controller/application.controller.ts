@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
-import * as ApplicationService from './application.service';
-import { ValidQueryRequest } from '../utils/zod.validator';
-import { ApplicationGetQuerySchema } from './application.schema';
+import * as ApplicationService from '../service/application.service';
+import { ValidQueryRequest } from '../../utils/zod.validator';
+import { ApplicationGetQuerySchema } from '../application.schema';
 
 export const getApplications = async (
 	req: Request,

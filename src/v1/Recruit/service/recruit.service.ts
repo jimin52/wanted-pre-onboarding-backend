@@ -1,5 +1,5 @@
-import { Recruitment } from './recruit.schema';
-import { prisma } from '../../index';
+import { Recruitment } from '../recruit.schema';
+import { prisma } from '../../../index';
 
 export const allRecruits = async () => {
 	const Recruitments = await prisma.recruitment.findMany();

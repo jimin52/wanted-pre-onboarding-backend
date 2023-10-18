@@ -4,16 +4,16 @@ import {
 	ApplicationPostRequestSchema,
 	ApplicationDetailGetResponseSchema,
 	ApplicationPutRequestSchema,
-} from './application.schema';
-import { ParamIdSchema } from '../utils/global.schema';
+} from '../application.schema';
+import { ParamIdSchema } from '../../utils/global.schema';
 import {
 	BadRequestConfig,
 	ConflictConfig,
 	InternalServerErrorConfig,
 	NotFoundConfig,
 	UnprocessableEntityConfig,
-} from '../utils/global.schema';
-import { registry } from '../utils/openapi';
+} from '../../utils/global.schema';
+import { registry } from '../../utils/openapi';
 
 export const makeApplicationOpenApi = () => {
 	registry.registerPath({

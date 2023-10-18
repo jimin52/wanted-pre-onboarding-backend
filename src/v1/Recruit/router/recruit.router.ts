@@ -3,9 +3,9 @@ import * as RecruitController from './recruit.controller';
 import {
 	validateBodyWithZod,
 	validateParamWithZod,
-} from '../utils/zod.validator';
-import { RecruitBodySchema } from './recruit.schema';
-import { ParamIdSchema } from '../utils/global.schema';
+} from '../../utils/zod.validator';
+import { RecruitBodySchema } from '../recruit.schema';
+import { ParamIdSchema } from '../../utils/global.schema';
 
 const RecruitRouter = Router();
 

@@ -1,8 +1,8 @@
-import * as RecruitServices from './recruit.service';
+import * as RecruitServices from '../service/recruit.service';
 import * as RecruitController from './recruit.controller';
 import httpMocks from 'node-mocks-http';
 import { Response } from 'express';
-import { Recruitment } from './recruit.schema';
+import { Recruitment } from '../recruit.schema';
 
 const initMockObjects = (validParam: object | undefined) => {
 	const mockRequest = initMockRequest(validParam);
