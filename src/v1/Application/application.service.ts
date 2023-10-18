@@ -25,9 +25,9 @@ export const getApplications = async (validSearch: string) => {
 				},
 				{
 					recruitment: {
-						techstacks: {
+						techStacks: {
 							some: {
-								techstack: {
+								techStack: {
 									name: { contains: validSearch, mode: 'insensitive' },
 								},
 							},
@@ -40,9 +40,9 @@ export const getApplications = async (validSearch: string) => {
 			recruitment: {
 				include: {
 					company: true,
-					techstacks: {
+					techStacks: {
 						include: {
-							techstack: true,
+							techStack: true,
 						},
 					},
 				},

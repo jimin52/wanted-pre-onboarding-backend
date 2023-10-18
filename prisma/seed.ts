@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-	const techstacks = await prisma.techstack.createMany({
+	const techStacks = await prisma.techStack.createMany({
 		data: [
 			{ name: 'Node.js' },
 			{ name: 'TypeScript' },
@@ -101,55 +101,55 @@ async function main() {
 			applications: {},
 		},
 	});
-	const requirement_techstacks = await prisma.recruitmentTechstack.createMany({
+	const requirement_techStacks = await prisma.recruitmentTechStack.createMany({
 		data: [
 			{
 				recruitmentId: 1,
-				techstackId: 1,
+				techStackId: 1,
 			},
 			{
 				recruitmentId: 1,
-				techstackId: 2,
+				techStackId: 2,
 			},
 			{
 				recruitmentId: 1,
-				techstackId: 3,
+				techStackId: 3,
 			},
 			{
 				recruitmentId: 1,
-				techstackId: 4,
+				techStackId: 4,
 			},
 			{
 				recruitmentId: 1,
-				techstackId: 5,
+				techStackId: 5,
 			},
 			{
 				recruitmentId: 2,
-				techstackId: 6,
+				techStackId: 6,
 			},
 			{
 				recruitmentId: 3,
-				techstackId: 7,
+				techStackId: 7,
 			},
 			{
 				recruitmentId: 4,
-				techstackId: 1,
+				techStackId: 1,
 			},
 			{
 				recruitmentId: 4,
-				techstackId: 2,
+				techStackId: 2,
 			},
 			{
 				recruitmentId: 4,
-				techstackId: 3,
+				techStackId: 3,
 			},
 			{
 				recruitmentId: 4,
-				techstackId: 4,
+				techStackId: 4,
 			},
 			{
 				recruitmentId: 4,
-				techstackId: 5,
+				techStackId: 5,
 			},
 		],
 	});

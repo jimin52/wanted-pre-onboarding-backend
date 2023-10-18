@@ -2,7 +2,6 @@ import * as ApplicationService from './application.service';
 import * as ApplicationController from './application.controller';
 import httpMocks, { MockRequest, MockResponse } from 'node-mocks-http';
 import { Response } from 'express';
-import { Prisma } from '@prisma/client';
 
 const initMockObjects = (validQuery: object) => {
 	const mockRequest = initMockRequest(validQuery);

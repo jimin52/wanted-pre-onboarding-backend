@@ -25,7 +25,7 @@ model Recruitment {
   companyId   Int
   position    String  //  채용포지션
   compensation Int    // 채용보상금. 숫자
-  techstacks  RecruitmentTechstack[]
+  techStacks  RecruitmentTechStack[]
   title       String
   description String
   createdAt   DateTime @default(now())
@@ -33,19 +33,19 @@ model Recruitment {
   applications Application[]
 }
 
-model Techstack {
+model TechStack {
   id          Int      @id @default(autoincrement())
   name        String  @unique
-  Recruitments RecruitmentTechstack[]
+  Recruitments RecruitmentTechStack[]
 }
 
-model RecruitmentTechstack {
+model RecruitmentTechStack {
   recruitmentId Int
-  techstackId   Int
+  techStackId   Int
   recruitment   Recruitment @relation(fields: [recruitmentId], references: [id])
-  techstack     Techstack   @relation(fields: [techstackId], references: [id])
+  techStack     TechStack   @relation(fields: [techStackId], references: [id])
 
-  @@id ([recruitmentId, techstackId])
+  @@id ([recruitmentId, techStackId])
 }
 model User {
   id          Int      @id @default(autoincrement())
