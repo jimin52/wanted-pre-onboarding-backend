@@ -1,13 +1,34 @@
-import { Recruitment } from '../recruit.schema';
+import { RecruitBodyType, RecruitWithTechstackType } from '../recruit.schema';
 import { prisma } from '../../../index';
 
 export const allRecruits = async () => {
-	const Recruitments = await prisma.recruitment.findMany();
-	return Recruitments;
+	const Recruitments = await prisma.recruitment.findMany({
+		include: {
+			company: true,
+			techStacks: {
+				include: {
+					techStack: true,
+				},
+			},
+		},
+	});
+	const RecruitmentsReturn: RecruitWithTechstackType[] = Recruitments.map(
+		(recruit) => ({
+			companyId: recruit.company.id,
+			position: recruit.position,
+			compensation: recruit.compensation,
+			title: recruit.title,
+			techStacks: recruit.techStacks.map((techStack) => ({
+				name: techStack.techStack.name,
+			})),
+			description: recruit.description,
+		}),
+	);
+	return RecruitmentsReturn;
 };
 
-export const createRecruit = async (recruit: Recruitment) => {
-	await prisma.recruitment.create({
+export const createRecruit = async (recruit: RecruitBodyType) => {
+	const prismaReturn = await prisma.recruitment.create({
 		data: {
 			company: {
 				connect: {
@@ -33,5 +54,24 @@ export const createRecruit = async (recruit: Recruitment) => {
 			},
 			description: recruit.description,
 		},
+		include: {
+			company: true,
+			techStacks: {
+				include: {
+					techStack: true,
+				},
+			},
+		},
 	});
+	const recruitReturn: RecruitWithTechstackType = {
+		companyId: prismaReturn.company.id,
+		position: prismaReturn.position,
+		compensation: prismaReturn.compensation,
+		title: prismaReturn.title,
+		techStacks: prismaReturn.techStacks.map((techStacks) => ({
+			name: techStacks.techStack.name,
+		})),
+		description: prismaReturn.description,
+	};
+	return recruitReturn;
 };

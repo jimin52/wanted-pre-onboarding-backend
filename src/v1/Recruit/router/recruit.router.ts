@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import * as RecruitController from './recruit.controller';
+import * as RecruitController from '../controller/recruit.controller';
 import {
 	validateBodyWithZod,
 	validateParamWithZod,

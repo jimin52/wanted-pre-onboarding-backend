@@ -2,7 +2,7 @@ import * as RecruitServices from '../service/recruit.service';
 import * as RecruitController from './recruit.controller';
 import httpMocks from 'node-mocks-http';
 import { Response } from 'express';
-import { Recruitment } from '../recruit.schema';
+import { RecruitWithTechstackType } from '../recruit.schema';
 
 const initMockObjects = (validParam: object | undefined) => {
 	const mockRequest = initMockRequest(validParam);
@@ -31,14 +31,14 @@ describe('RecruitController', () => {
 		it('모든 recruit 조회', async () => {
 			const { mockRequest, mockResponse, mockNext } =
 				initMockObjects(undefined);
-			const mockRecruits: Recruitment[] = [
+			const mockRecruits: RecruitWithTechstackType[] = [
 				{
-					id: 1,
 					companyId: 1,
 					position: 'test',
+					title: 'test',
 					compensation: 1000000,
-					techStack: ['test'],
-					description: 'test',
+					techStacks: [{ name: 'test' }],
+					description: '123456789abcdefghijk',
 				},
 			];
 			jest
@@ -63,12 +63,12 @@ describe('RecruitController', () => {
 		it('recruit 생성', async () => {
 			const { mockRequest, mockResponse, mockNext } =
 				initMockObjects(undefined);
-			const mockRecruit: Recruitment = {
-				id: 1,
+			const mockRecruit: RecruitWithTechstackType = {
 				companyId: 1,
 				position: 'test',
+				title: 'test',
 				compensation: 100000,
-				techStack: ['test'],
+				techStacks: [{ name: 'test' }],
 				description: 'test',
 			};
 			jest
@@ -76,5 +76,6 @@ describe('RecruitController', () => {
 				.mockReturnValue(Promise.resolve(mockRecruit));
 			await RecruitController.postRecruit(mockRequest, mockResponse, mockNext);
 			expectMockResponse(mockResponse, 200, mockRecruit);
-		}
+		});
+	});
 });

@@ -3,7 +3,7 @@ import {
 	OpenApiGeneratorV3,
 } from '@asteasolutions/zod-to-openapi';
 import { makeApplicationOpenApi } from '../application/router/application.openapi';
-import { makeRecruitOpenApi } from '../recruit/recruit.openapi';
+import { makeRecruitOpenApi } from '../recruit/router/recruit.openapi';
 
 export const registry = new OpenAPIRegistry();
 

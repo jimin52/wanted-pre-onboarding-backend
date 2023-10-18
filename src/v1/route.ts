@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import RecruitRouter from './recruit/router/recruit.router';
-import ApplicationRouter from './application/application.router';
+import ApplicationRouter from './application/router/application.router';
 
 const v1router = Router();
 

@@ -1,14 +1,14 @@
-import { RecruitBodySchema } from './recruit.schema';
+import { RecruitBodySchema } from '../recruit.schema';
 
-import { ParamIdSchema } from '../utils/global.schema';
-import { registry } from '../utils/openapi';
+import { ParamIdSchema } from '../../utils/global.schema';
+import { registry } from '../../utils/openapi';
 import {
 	BadRequestConfig,
 	ConflictConfig,
 	InternalServerErrorConfig,
 	NotFoundConfig,
 	UnprocessableEntityConfig,
-} from '../utils/global.schema';
+} from '../../utils/global.schema';
 
 export const makeRecruitOpenApi = () => {
 	registry.registerPath({

@@ -1,17 +1,17 @@
 import { Router } from 'express';
-import * as ApplicationController from './controller/application.controller';
+import * as ApplicationController from '../controller/application.controller';
 import {
 	validateBodyWithZod,
 	validateParamWithZod,
 	validateQueryWithZod,
-} from '../utils/zod.validator';
+} from '../../utils/zod.validator';
 import {
 	ApplicationGetQuerySchema,
 	ApplicationPostRequestSchema,
 	ApplicationDetailGetResponseSchema,
 	ApplicationPutRequestSchema,
-} from './application.schema';
-import { ParamIdSchema } from '../utils/global.schema';
+} from '../application.schema';
+import { ParamIdSchema } from '../../utils/global.schema';
 
 const ApplicationRouter = Router();
 

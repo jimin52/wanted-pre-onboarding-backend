@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
-import { allRecruits } from './recruit.service';
+import { allRecruits, createRecruit } from '../service/recruit.service';
+import { ValidBodyRequest } from 'src/v1/utils/zod.validator';
+import { RecruitBodySchema } from '../recruit.schema';
 
 export const getRecruits = async (
 	req: Request,
@@ -18,7 +20,16 @@ export const postRecruit = async (
 	req: Request,
 	res: Response,
 	next: NextFunction,
-) => {};
+) => {
+	try {
+		const safeRecruit = (req as ValidBodyRequest<typeof RecruitBodySchema>)
+			.validBody;
+		const recruit = await createRecruit(safeRecruit);
+		res.status(200).json(recruit);
+	} catch (err) {
+		next(err);
+	}
+};
 
 export const getRecruit = async (
 	req: Request,
